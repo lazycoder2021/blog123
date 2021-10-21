@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <textarea name="copyTxt" rows="3" cols="50">Hello World</textarea>
+    <button class="copyBtn">Copy Code</button>
+
+    <script>
+
+        const copyTxt = document.querySelector("textarea[name=copyTxt]");
+        const copyBtn = document.querySelector(".copyBtn");
+
+        copyBtn.addEventListener("click", copyText);
+
+        function copyText() {
+            let temp = copyTxt.value;
+            copytoClipBoard(temp);
+            
+        }
+
+        function copytoClipBoard(str) {
+            const textarea = document.createElement("textarea");
+            textarea.value = str;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            //output.innerHTML = "<h3>Copied content</h3>" + textarea.value;
+            alert('copied!')
+        }
+
+
+    </script>
+</body>
+</html>

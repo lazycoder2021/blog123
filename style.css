@@ -1,0 +1,157 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300&display=swap');
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+    font-family:Source Sans Pro; 
+}
+
+.container{
+   width:1000px;
+   border:0px solid black;
+   margin:auto;
+}
+
+.navbar{
+    border:0px solid black;
+    margin-top:15px;
+}
+
+.navbar p{
+    display:inline-block;
+    font-size:18px; 
+    font-weight:700;
+    padding:3px;
+    margin:5px;
+}
+
+.caption{
+    border:0px solid black; 
+    text-align:center; 
+    margin-top:50px;
+    margin-bottom:20px;
+}
+
+.caption h1{
+    font-size:48px;
+    font-weight:600;
+}
+
+.caption h3{
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.main-article {
+    border: 1px solid black;
+    width: 80%;
+    display: flex;
+    margin: auto;
+    padding: 5px;
+    box-shadow: 5px 10px #888888;
+}
+
+.main-article-left-content{
+    border:0px solid black; 
+    width:40%;
+}
+
+.main-article-left-content img{
+    width:100%; 
+    object-fit:cover;
+
+    
+}
+
+.main-article-right-content {
+    background-color: #FEE6E3;
+    padding: 24px 20px;
+    width: 60%;
+}
+
+.main-article-right-content h2{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+    .main-article-right-content p {
+        font-size: 20px;
+        letter-spacing:0.5px;
+        
+    }
+
+.blogs-section{
+    border:0px solid black; 
+    height:auto;
+    margin-top:20px;
+}
+
+.blogs-section-title{
+    margin:20px 15px;
+}
+
+.blogs-section-title h1{
+    font-weight:300;
+    text-decoration:underline; 
+}
+
+.blogs-listing-section{
+    border:1px solid black;
+    width:95%;
+    margin:10px;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.blog{
+    width:33.33%; 
+    margin-bottom:10px;
+    transition:0.3s;
+}
+
+.blog-image{
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+}
+
+
+
+.blog .blog-image img{
+    width:100%; 
+    object-fit:cover;
+}
+
+span {
+    background-color: #FFE0D6; 
+    padding:5px;
+    margin-left:10px;
+    font-weight:700;
+    
+}
+
+.blog-heading h1{
+    font-weight:300;
+    font-size:26px;
+    margin-top:10px;
+    margin-left:5px;
+    
+}
+
+.blog:hover {
+    background-color: #FEE6E3;
+    cursor:pointer; 
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+
+}

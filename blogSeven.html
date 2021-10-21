@@ -1,0 +1,472 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300&display=swap" rel="stylesheet">
+
+    <style>
+        .response{
+            border:1px solid black; 
+            margin-left:50px; 
+            margin-bottom:15px;
+            height:40px;
+            font-size:24px;
+            padding:5px;
+        }
+
+        #htmlcontent{
+            border:1px solid black;
+            width:800px;
+            font-size:20px;
+        }
+
+        #csscontent{
+            border:1px solid black;
+            width:800px; 
+            font-size:20px;
+        }
+
+        .note {
+            margin-left: 40px;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        video {
+            height: 400px;
+            width: 700px;
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+
+        li {
+            margin-top: 20px;
+            margin-left: 45px;
+            font-size: 25px;
+        }
+
+            li.special {
+                margin-top: 20px;
+                margin-left: 85px;
+                font-size: 25px;
+            }
+
+        .number-list{
+            margin-top:0px;
+        }
+
+        .gif-container{
+            border:0px solid black;
+            margin: 0px auto;
+            height:450px;
+            width:750px;
+        }
+
+        #gifs{
+            height:550px;
+            width:700px;
+            margin-bottom:0px;
+            border:0px solid black;
+            
+        }
+
+        #gifsLarger{
+            height:750px;
+            width: 800px;
+        }
+
+        
+
+        * {
+            font-family: 'Source Sans Pro';
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: white;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .left-pane {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            border: 0px solid black;
+            background-color: lightgoldenrodyellow;
+            height: 100%;
+            overflow:scroll; 
+        }
+
+        .left-pane-heading{
+            padding:8px;
+            font-size:25px;
+        }
+
+            .left-pane a {
+                text-decoration: none;
+                font-size: 20px;
+                padding: 5px;
+                color:black;
+                
+            }
+
+                .left-pane a p {
+                    padding: 3px;
+                    font-weight: 200;
+                }
+
+                .left-pane a.subtitle {
+                    margin-left: 10px;
+                    color: black;
+                }
+
+
+        .right-pane {
+            border: 0px solid black;
+            width: 70%;
+            margin-left: 320px;
+        }
+
+            .right-pane .section1 {
+                height: auto;
+            }
+
+            .right-pane .section2 {
+                height: auto;
+            }
+
+            .right-pane .section3 {
+                height: auto;
+            }
+
+            .right-pane .section4 {
+                height: auto;
+            }
+
+            section h1{
+                font-size:40px;
+            }
+
+            section h2{
+                font-size:30px;
+                margin-top:30px;
+                font-weight:300;
+            }
+
+            section p{
+                margin-top:20px;
+                font-size:25px;
+                letter-spacing:0.2px;
+                line-height:45px;
+            }
+
+
+        #content {
+            border: 1px solid black;
+            width: 420px;
+            margin: 30px auto;
+            position:relative; 
+        }
+
+        p code{
+            padding:15px;
+            font-size:20px;
+            margin-bottom:0px;
+        }
+
+        #section6{
+            position:relative; 
+        }
+
+        .btn{
+            position:absolute; 
+            right:328px;
+            top:50px;
+            padding:3px;
+        }
+
+        .images{
+            border:1px solid black;
+            margin-top:20px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="left-pane">
+            <h3 class="left-pane-heading">Table Of Contents</h3>
+
+            <a href="#section2"><p>Create A Simple Server</p></a>
+            <a href="#section3"><p>Setting Up Our Simple Database</p></a>
+            <a href="#section4"><p>Setting Up Our GET Route</p></a>
+            <a href="#y" class="subtitle"><p>How to Send the Data <br />to the Browser?</p></a>
+            <a href="#x" class="subtitle"><p>Accessing Our GET Route</p></a>
+
+            <a href="#section5"><p>Setting Up Our POST Route</p></a>
+            <a href="#a" class="subtitle"><p>Read Posted Data <br />Using express.json()</p></a>
+            <a href="#b" class="subtitle"><p>Posting Data To Our<br /> Server Using Postman</p></a>
+            <a href="#c" class="subtitle"><p>Creating New Object <br />for Capturing Posted Data</p></a>
+            <a href="#d" class="subtitle"><p>Capturing Data Using <br />req.body</p></a>
+            <a href="#e" class="subtitle"><p>Checking Whether <br />Our Database Got Updated</p></a>
+            <a href="#section6" class="section"><p>Setting Up Single GET Route</p></a>
+            <a href="#f" class="subtitle"><p>Using req.params.id Object</p></a>
+            <a href="#g" class="subtitle"><p>Using Array Index as <br/>Our Record ID</p></a>
+
+
+
+        </div>
+
+        <div class="right-pane">
+
+            <section class="section1">
+                <h1>Web Server Basics: Express CRUD Routing I </h1>
+                <p>In this blog post, we’ll be doing the same thing we did in our previous blog, but this time by configuring our own express server. </p>
+                <p>To keep things simple, we’ll be using an array of objects as our database. Because of this reason, you’ll be able to perform only: get and post operations. As patch/delete operations are heavily DB dependent, we’ll reserve them for later (when we will be using a real database).  </p>
+                <p>So let's get started.</p>
+
+                <h2><b>Prerequisites</b></h2>
+                 <p>You should also install an npm package called nodemon. This helps with live server reloads (or restarts). Meaning you don’t have to execute node index.js every time you want to restart your server. This happens on it own when you save index.js file.</p>
+                <video controls autoplay loop>
+                    <source src="videos/blog7_VideoOne.mp4" type="video/mp4" />
+                </video>
+
+                <br />
+            </section>
+
+            <br />
+
+            
+
+
+            <section class="section2" id="section2">
+                <h1>
+                    1.Create A Simple Server
+                </h1>
+                <p>
+                    You already know this. Refer the video clip below to refresh your memory and setup an express server.
+                </p>
+
+                <video controls autoplay loop>
+                    <source src="videos/simpleserver.mp4" type="video/mp4" />
+                </video>
+            </section>
+            <br /><br />
+                  <section class="section3" id="section3">
+                      <h1>2.Setting Up Our Simple Database</h1>
+
+                      <p>A simple array of objects will replace JSON server as our database this time. </p>
+
+
+                      
+
+                      <p><b>Note:</b> Don’t worry we will eventually get to using a real database. But when it comes to programming, it’s best to focus on one thing at a time. So an array of objects within our index.js will do for now. </p>
+                      <p>So add the following code to your index.js</p>
+                      <center><p>[embedded code goes here...]</p></center>
+                      <ol>
+                          <li>As you can see, each object (or record since it’s basically a database) contains a name, designation and id property. And since we are trying to store employee related information, we name our little database as ‘employees’. </li>
+                          <li>This data arrangement is an exact replica of what you will see if you were using mongodb. Only the naming conventions would change. [The array would be called Collection and the objects as documents. More on MongoDB, here: read [this]].</li>
+                      </ol>
+                          <p><b>Note:</b> To know more about JavaScript array of objects, read [this]</p>
+                      
+                      
+
+                      
+
+                  </section>
+            <br /><br />
+
+                  <section class="section4" id="section4">
+                      <h1>3. Setting Up Our GET Route</h1>
+                      <video controls autoplay loop>
+                          <source src="videos/blog7_VideoTwo.mp4" type="video/mp4" />
+                      </video>
+
+                      <ol>
+                          <li>Our goal is to create a ‘/employees’ route or endpoint that will ‘get’ and display all the records available in our database. [In other words, all the information we just stored in our employees array]. </li>
+                          <li>How do we do this? By making use of app.get() method configured to serve ‘employees’ array at the ‘/employees’ route. </li>
+                          <li>So setup a app.get() method as shown in the video clip above. </li>
+                      </ol>
+
+                      <h2 id="y"><b>3.1 How to Send the Data to the Browser?</b></h2section="#x">
+                      <video controls autoplay loop>
+                          <source src="videos/blog7_VideoThree.mp4" type="video/mp4" />
+                      </video>
+
+                      <h2 id="x"><b>3.2 Accessing Our GET Route</b></h2>
+                      <p>Try hitting endpoint http://localhost:3000/employees and our database information gets displayed. </p>
+                      <video controls autoplay loop>
+                          <source src="videos/blog7_VideoFour.mp4" type="video/mp4" />
+                      </video>
+
+
+
+                      <p>Great! You just configured an express GET route.</p>
+
+
+
+                  </section>
+
+                <br /><br />
+                      <section class="section5" id="section5">
+                          <h1>4.Setting Up Our POST Route</h1>
+                          <video controls autoplay loop>
+                              <source src="videos/blog7_videoFive.mp4" type="video/mp4" />
+                          </video>
+                          <ol>
+                              <li>Our goal is to create another ‘/employees’ route which is going to help us ‘post’ data to our server.</li>
+                              <li>How are we going to do this? Yes, by making use of app.post() method. </li>
+                              <li>And since we don’t have a frontend yet, we’ll be making use of Postman for posting the data. </li>
+                              <li>So let's setup a post route as shown in the video clip.</li>
+                          </ol>
+
+
+
+                          <h2 id="a"><b>4.1 Read Posted Data Using express.json()</b></h2>
+                          <ol>
+                              <li>Before we post the data to our ‘/express’ endpoint, we have to enable our server so that it can read the data being posted. So, just like we did in our previous blog, we have include the express.json( ) middleware in our index.js file. </li>
+                              <video controls autoplay loop>
+                                  <source src="videos/blog7_videoSix.mp4" type="video/mp4" />
+                              </video>
+                              <li>Now that our server is ready to read the data being posted to its post route, let’s try sending over the same data using Postman.</li>
+                          </ol>
+
+                          <h2 id="b"><b>4.2 Posting Data To Our Server Using Postman</b></h2>
+                          <ol>
+                              <li>Ensure you select ‘POST’ method from the dropdown and select raw option and select JSON(application/json) option as shown in the video clip. Also, ensure the data you send across follows the data pattern shown in our database (that is: name, designation, id). </li>
+                              <video controls autoplay loop>
+                                  <source src="videos/blog7_videoSeven.mp4" type="video/mp4" />
+                              </video>
+                              <li>Postman will try sending across the data to our server but fail. This is because our post route is empty.</li>
+                              <li> In other words, the logic to capture the incoming data is missing. So let’s create it now. </li>
+                          </ol>
+
+                          <h2 id="c"><b>4.3 Creating New Object for Capturing Posted Data</b></h2>
+                          <ol>
+
+                              <li>Now since our database is an array of objects, we have to create a new object (to store the data being posted) every time the data gets posted to our route and then push it into our database array. </li>
+                              <li>Just like in our previous blog, we have to make use of request body object (req.body) to capture the posted data. </li>
+                              <li> <b>Note:</b> The new object we create should have the same keys (that is, name, designation and id) as the records in our database. After all, it’s going to be pushed into our database. </li>
+                              <img src="images/postingData.jpg" style="margin-left:50px; border:1px solid black;" />
+                          </ol>
+
+                          <h2 id="d"><b>4.4 Capturing Data Using req.body</b></h2>
+                          <ol>
+
+                              <li>Just like in our previous blog, we have to make use of request body object (req.body) to capture the posted data (and assign it to the appropriate keys of our newly created object). </li>
+                              <li>Once incoming data is captured, next is to push the newly created object into our employees’ array. </li>
+                              <video controls autoplay loop>
+                                  <source src="videos/blog7_videoEight.mp4" type="video/mp4" />
+                              </video>
+                          </ol>
+
+                          <h2 id="e"><b>4.5 Checking Whether Our Database Got Updated</b></h2>
+                          <ol>
+                              <video controls autoplay loop>
+                                  <source src="videos/blog7_videoNine.mp4" type="video/mp4" />
+                              </video>
+                              <li><b>IMPORTANT:</b> Since our database is just an array of objects. We won’t be able to persist any data in it. [Once our server connection is closed, the data will be lost]. </li>
+                              <li>But temporarily, our data does get stored in the employees array and it can be accessed only by hitting the GET route (‘/employees’) endpoint and not in the index.js file. </li>
+                              <li>So you just have to access our GET route (‘/employees’) to view our updated database.  </li>
+
+                          </ol>
+
+
+
+
+
+                      </section>
+                <br /><br />
+                      <section class="section6" id="section6">
+                          <h1>Setting Up Single GET Route </h1>
+                          <p>Just like with our previous blog, we’ll also try and get individual data using our GET route. But since we are not using a real database, we’ll have to make some tweaks to our code. </p>
+
+                          <h2 id="f"><b>Using req.params.id Object </b></h2>
+                          <p>Now since we are dealing with the request object and need to pass a parameter (the id of the record being fetched) to get access to a specific record within the database, we need to make use of req.params method.  </p>
+                          <br />
+                          <h2><b>What is a params in req.params.id?</b>  </h2>
+                          <p>This piece of code is basically responsible for capturing whatever that’s passed after a route (and deliver the information belonging to the value captured).   </p>
+                          <p>They are of 2 types: URL parameter and query parameter. The one we are dealing with is a URL parameter (since it’s being passed to the URL directly). More on parameters here. </p>
+                          <br />
+                          <h2><b>What Does req.param.id Do?</b>  </h2>
+                          <ol>
+                              <li>This piece of code is basically responsible for capturing whatever that’s passed after a route (and deliver the information belonging to the value captured).</li>
+                              <li>For example: value of the /:id in <a href="#">http://localhost:3000/employees/:id </a></li>
+                              <p><b>Note:</b> Make note of the syntax. That is, the : before the id.</p>
+                              <li>In our case, req.params.id is needed to capture the id of the record we want to fetch, so that the relevant information can be extracted and displayed. </li>
+                              <p><b>Note:</b> We are duplicating database behaviour. With databases, you need ids to fetch relevant record. </p>
+                              <li>Let’s create our app.get() route for fetching individual records using req.param.id</li>
+                              <video controls autoplay loop>
+                                  <source src="videos/blog7_videoTen.mp4" type="video/mp4" />
+                              </video>
+                              <li>:id represents record id which is captured using req.params.id.</li>
+                              <li>Then it is sent as response when the endpoint is hit.</li>
+                              <li> You'll notice that req.params.id enables us to capture whatever that is passed to our endpoint. </li>
+                          </ol>
+                          <br />
+                          <h2 id="g"><b>Using Array Index as Our Record ID </b></h2>
+                          <p>Now IDs within our temporary employees database array are dummy. They do not successfully identify the record and extract information for them. Because of this, we are going to make use of array indexes instead to do the same.  </p>
+                          <p><b>Note:</b> More on array index here.</p>
+                          <ol>
+                              <li>Copy/paste the following code in your get route</li>
+                              <div class="response" contenteditable="true">res.send(employees[`${id}`].name + '&nbsp;' + employees[`${id}`].designation + '&nbsp;' + employees[`${id}`].id) </div>
+                              <li>You’ll notice we are simply sending the employee object information over. And the [id] value obtained using req.params.id is going to serve as the array index for fetching the relevant record.</li>
+                              <li>Now try passing an array index of our employees array and see what happens. </li>
+                              <li><b>Note:</b>More on accessing objects within array of objects here. </li>
+                              <video controls autoplay loop>
+                                  <source src="videos/blog7_videoEleven.mp4" type="video/mp4" />
+                              </video>
+                              <li>The data belonging to the passed array index gets displayed on the browser. </li>
+                              <li>There you go! We just created a temporary/makeshift database and used app.get( ) and app.post( ) methods to access our data! </li>
+                          </ol>
+                          <br />
+
+                      </section>
+
+
+</div>
+    </div>
+
+    <script>
+        var content = document.querySelector('#htmlcontent');
+        var btn = document.querySelector('#btn');
+
+        btn.addEventListener('click', copyText);
+
+        function copyText() {
+            let temp = content.innerText;
+            copytoClipBoard(temp);
+
+        }
+
+        function copytoClipBoard(str) {
+            const textarea = document.createElement("textarea");
+            textarea.value = str;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            //output.innerHTML = "<h3>Copied content</h3>" + textarea.value;
+            alert('copied!')//output.innerHTML = "<h3>Copied content</h3>" + textarea.value;
+
+        }
+
+        console.log(content)
+    </script>
+
+
+
+</body>
+</html>
